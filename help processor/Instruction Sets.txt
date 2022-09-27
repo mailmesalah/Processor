@@ -1,0 +1,150 @@
+16 BIT Instruction Sets
+=======================
+
+Load and Store Instructions
+---------------------------
+00000000 LDA			//Loads 8 bit data to Accumulator from memory with the address specified in the operand.
+00000001 STA			//Store 8 bit accumulator data in memory with the address specified in the operand.
+
+01001001 LDA B			//Load the content of memory at address specified by Register B, to Accumulator
+01001010 LDA C			//Load the content of memory at address specified by Register C, to Accumulator
+01001011 LDA D			//Load the content of memory at address specified by Register D, to Accumulator
+01001100 LDA E			//Load the content of memory at address specified by Register E, to Accumulator
+
+Immediate Instruction
+---------------------
+00000010 MVI 1 byte Data	//8 bit data specified in the operand is copied to accumulator.
+
+Move Instructions
+-----------------
+00000011 MOV A,B		//Content of Register B is copied to Accumulator
+00000100 MOV A,C		//Content of Register C is copied to Accumulator
+00000101 MOV A,D		//Content of Register D is copied to Accumulator
+00000110 MOV A,E		//Content of Register E is copied to Accumulator
+
+00000111 MOV B,A		//Content of Accumulator is copied to Register B
+00001000 MOV C,A		//Content of Accumulator is copied to Register C
+00001001 MOV D,A		//Content of Accumulator is copied to Register D
+00001010 MOV E,A		//Content of Accumulator is copied to Register E
+
+Addition
+--------
+00001011 ADD B			//Register B is added with accumulator and stored in accumulator
+00001100 ADD C			//Register C is added with accumulator and stored in accumulator
+00001101 ADD D			//Register D is added with accumulator and stored in accumulator
+00001110 ADD E			//Register E is added with accumulator and stored in accumulator
+00001111 ADD MEM		//Memory content at address specified in the operand is added with accumulator and stored in accumulator
+
+01001101 ADD BM			//Add content of memory at address specified by Register B, with Accumulator and store in accumulator
+01001110 ADD CM			//Add content of memory at address specified by Register C, with Accumulator and store in accumulator
+01001111 ADD DM			//Add content of memory at address specified by Register D, with Accumulator and store in accumulator
+01010000 ADD EM			//Add content of memory at address specified by Register E, with Accumulator and store in accumulator
+
+Subtraction
+-----------
+00010000 SUB B			//Register B is subtracted from accumulator and stored in accumulator
+00010001 SUB C			//Register C is subtracted from accumulator and stored in accumulator
+00010010 SUB D			//Register D is subtracted from accumulator and stored in accumulator
+00010011 SUB E			//Register E is subtracted from accumulator and stored in accumulator
+00010100 SUB MEM		//Memory content at address specified in the operand is subtracted from accumulator and stored in accumulator
+
+01010001 SUB BM			//Subtract content of memory at address specified by Register B, from Accumulator and store in accumulator
+01010010 SUB CM			//Subtract content of memory at address specified by Register C, from Accumulator and store in accumulator
+01010011 SUB DM			//Subtract content of memory at address specified by Register D, from Accumulator and store in accumulator
+01010100 SUB EM			//Subtract content of memory at address specified by Register E, from Accumulator and store in accumulator
+
+Multiplication
+--------------
+00010101 MUL B			//Register B is multiplied with accumulator and stored in accumulator
+00010110 MUL C			//Register C is multiplied with accumulator and stored in accumulator
+00010111 MUL D			//Register D is multiplied with accumulator and stored in accumulator
+00011000 MUL E			//Register E is multiplied with accumulator and stored in accumulator
+00011001 MUL MEM		//Memory content at address specified in the operand is multiplied with accumulator and stored in accumulator
+
+01010101 MUL BM			//Multiply content of memory at address specified by Register B, with Accumulator and store in accumulator
+01010110 MUL CM			//Multiply content of memory at address specified by Register C, with Accumulator and store in accumulator
+01010111 MUL DM			//Multiply content of memory at address specified by Register D, with Accumulator and store in accumulator
+01011000 MUL EM			//Multiply content of memory at address specified by Register E, with Accumulator and store in accumulator
+
+Division
+--------
+00011010 DIV B			//Register B is divided from accumulator and stored in accumulator
+00011011 DIV C			//Register C is divided from accumulator and stored in accumulator
+00011100 DIV D			//Register D is divided from accumulator and stored in accumulator
+00011101 DIV E			//Register E is divided from accumulator and stored in accumulator
+00011110 DIV MEM		//Memory content at address specified in the operand is divided from accumulator and stored in accumulator
+
+01011001 DIV BM			//Divide content of memory at address specified by Register B, from Accumulator and store in accumulator
+01011010 DIV CM			//Divide content of memory at address specified by Register C, from Accumulator and store in accumulator
+01011011 DIV DM			//Divide content of memory at address specified by Register D, from Accumulator and store in accumulator
+01011100 DIV EM			//Divide content of memory at address specified by Register E, from Accumulator and store in accumulator
+
+Reminder
+--------
+00011111 REM B			//Register B is modulised from accumulator to find reminder and stored in accumulator
+00100000 REM C			//Register C is modulised from accumulator to find reminder and stored in accumulator
+00100001 REM D			//Register D is modulised from accumulator to find reminder and stored in accumulator
+00100010 REM E			//Register E is modulised from accumulator to find reminder and stored in accumulator
+00100011 REM MEM		//Memory content at address specified in the operand is modulused with accumulator and stored in accumulator
+
+01011101 REM BM			//Modulo content of memory at address specified by Register B, from Accumulator and store in accumulator
+01011110 REM CM			//Modulo content of memory at address specified by Register C, from Accumulator and store in accumulator
+01011111 REM DM			//Modulo content of memory at address specified by Register D, from Accumulator and store in accumulator
+01100000 REM EM			//Modulo content of memory at address specified by Register E, from Accumulator and store in accumulator
+
+Increment
+---------
+00100100 INC A			//Accumulator is incremented and stored in accumulator
+00100101 INC B			//Register B is incremented and stored in accumulator
+00100110 INC C			//Register C is incremented and stored in accumulator
+00100111 INC D			//Register D is incremented and stored in accumulator
+00101000 INC E			//Register E is incremented and stored in accumulator
+00101001 INC MEM		//Memory content at address specified in the operand is incremented and stored in accumulator
+
+Decrement
+---------
+00101010 DEC A			//Accumulator is decremented and stored in accumulator
+00101011 DEC B			//Register B is decremented and stored in accumulator
+00101100 DEC C			//Register C is decremented and stored in accumulator
+00101101 DEC D			//Register D is decremented and stored in accumulator
+00101110 DEC E			//Register E is decremented and stored in accumulator
+00101111 DEC MEM		//Memory content at address specified in the operand is decremented and stored in accumulator
+
+AND
+---
+00110000 AND B			//Register B is ANDed with accumulator to find reminder and stored in accumulator
+00110001 AND C			//Register C is ANDed with accumulator to find reminder and stored in accumulator
+00110010 AND D			//Register D is ANDed with accumulator to find reminder and stored in accumulator
+00110011 AND E			//Register E is ANDed with accumulator to find reminder and stored in accumulator
+00110100 AND MEM		//Memory content at address specified in the operand is ANDed with accumulator and stored in accumulator
+
+OR
+--
+00110101 OR B			//Register B is ORed with accumulator to find reminder and stored in accumulator
+00110110 OR C			//Register C is ORed with accumulator to find reminder and stored in accumulator
+00110111 OR D			//Register D is ORed with accumulator to find reminder and stored in accumulator
+00111000 OR E			//Register E is ORed with accumulator to find reminder and stored in accumulator
+00111001 OR MEM			//Memory content at address specified in the operand is ORed with accumulator and stored in accumulator
+
+XOR
+---
+00111010 XOR B			//Register B is XORed with accumulator to find reminder and stored in accumulator
+00111011 XOR C			//Register C is XORed with accumulator to find reminder and stored in accumulator
+00111100 XOR D			//Register D is XORed with accumulator to find reminder and stored in accumulator
+00111101 XOR E			//Register E is XORed with accumulator to find reminder and stored in accumulator
+00111110 XOR MEM		//Memory content at address specified in the operand is XORed with accumulator and stored in accumulator
+
+Jump Instructions
+-----------------
+00111111 JMP MEM		//Change Program counter with the address specified in the operand of the instruction, so that the next instruction at that particular 					//..address will be executed.
+Conditional Jumping
+-------------------
+01000000 JZ MEM			//Change Program counter with the address specified in the operand of the instruction if Zero Flag is set
+01000011 JN MEM			//Change Program counter with the address specified in the operand of the instruction if Sign Flag is set
+
+01000100 JNZ MEM		//Change Program counter with the address specified in the operand of the instruction if Zero Flag is not set
+01000111 JNN MEM		//Change Program counter with the address specified in the operand of the instruction if Sign Flag is not set
+
+Halt Instruction
+----------------
+01001000 HLT			//Stop Execution

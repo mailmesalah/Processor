@@ -1,0 +1,64 @@
+This is a 16 bit processor with 8 bit address space. It has 16 bit instruction set having 8 bit opcode and 8 bit operand. 
+There 97 instruction sets used. 
+The processor has 4 Registers named B,C,D and E along with Accumulator register. 
+We are using big endian system to represent binary values in memory. 
+The memory can hold 0 to 255 address space but we have only used 0 to 99, the constant variable MEMORY_SIZE can be used to update the size of memory being used. Program counter is always incremented for each instructions except for jump instructions.
+The flag registers are used for conditional branchings(jumpings).
+The execution of the program for the processor starts with loading the program to the memory (RAM). The program is fed to the two dimensional array[256,2] where the 256 specfies the address part and 2 bytes in that address space may contain instruction or data. 
+Data is stored in the second byte. Once the program that is supposed to be executed by processor, is loaded to memory by calling the method 'LoadProgramToRAM()', Program counter is reset to 0 to start fetching instructions from first address, that is 0(00000000). 
+PrintProcessorStatus() prints processor current status with all the 4 registers, program counter, flags and instruction set. This method can be used to check state of processor at any time. This method is called next to print the initial status of processor. 
+PrintMemory() method is called next which prints the whole memory content one address data on a line. This help us to see, whats on the memory currently. FetchDecodeNExecute() is called then, which fetches Instruction from memory to Instruction set register
+	Instruction[0] = RAM[ProgramCounter, 0];
+        Instruction[1] = RAM[ProgramCounter, 1];
+The opcode is loaded to Instruction[0] and operand is loaded to Instruction[1]. Address to the RAM is specified by ProgramCounter. 
+FetchDecodeNExecute() then calls ControlUnitParse() method which parse throught the OPCODE to find the current instruction being loaded, that is the decode part. Once any of case statement get a match , the execution part is done when that case block is executed. This method returns a boolean value (true or false). For all the cases except HLT instruction and default case a false is returned, which indicates it has not find HLT statement to stop execution. This returned value is propogated to the main function where it the FetchDecodeNExecute() method is called in a while condition part. FetchDecodeNExecute() is negated in the while's condition section to let it execute as long as HLT command or invalid command is found. 
+Once the execution is over, that is HLT instruction is executed or invalid instruction has been found the program gets out of the loop and prints out processor status and memory (RAM) status.
+
+The program used to be executed by processor is given below
+It is the program to find (1*5)+(2*4)+(3*3)+(4*2)+(5*1), to implement array multiplication.
+
+MVI 1	//Store 1 in Accumulator
+STA 40	//Store Accumulator data to memory with address 40
+MVI 2	//Store 2 in Accumulator
+STA 41	//Store Accumulator data to memory with address 41
+MVI 3	//Store 3 in Accumulator
+STA 42	//Store Accumulator data to memory with address 42
+MVI 4	//Store 4 in Accumulator
+STA 43	//Store Accumulator data to memory with address 43
+MVI 5	//Store 5 in Accumulator
+STA 44	//Store Accumulator data to memory with address 44
+MVI 5	//Store 5 in Accumulator
+STA 50	//Store Accumulator data to memory with address 50
+MVI 4	//Store 4 in Accumulator
+STA 51	//Store Accumulator data to memory with address 51
+MVI 3	//Store 3 in Accumulator
+STA 52	//Store Accumulator data to memory with address 52
+MVI 2	//Store 2 in Accumulator
+STA 53	//Store Accumulator data to memory with address 53
+MVI 1	//Store 1 in Accumulator
+STA 54	//Store Accumulator data to memory with address 54
+MVI 0	//Store 0 in Accumulator
+MOV C,A	//Move Accumulator content to Register C
+MVI 40	//Store 40 in Accumulator
+MOV D,A	//Move Accumulator content to Register D
+MVI 50	//Store 50 in Accumulator
+MOV E,A	//Move Accumulator content to Register E
+MVI 6	//Store 6 in Accumulator
+MOV B,A	//Move Accumulator content to Register B
+DEC B	//Decrement Register B content and Store in Accumulator
+JZ 37	//Jump to address 37 if Accumulator is 0 
+LDA D	//Load Memory content to Accumulator for which the address is specified by the content in register D
+MUL EM	//Multiply Accumulator with Memory content, the address is specified by the content of Register E
+ADD C	//Add Register C content with Accumulator and store in Accumulator
+MOV C,A	//Move Accumulator content to Register C
+INC D	//Increment Register D and store in accumulator and D
+INC E	//Increment Register E and store in accumulator and E
+JMP 28	//Jump to address 28
+HLT	//Stop execution
+
+In the above code 1,2,3,4,5 values are stored in consecutive memory address starting from 40 and 5,4,3,2,1 are stored in consicutive memory starting from address 50.
+C register is clear to 0 to store the sum of product values. D register is loaded with 40 which is used to go through the memory address to get data from memory like an array
+E register is loaded with 50 for the same purpose.
+B Register is loaded with 6 for counting down till 0 so the loop can execute 5 times.
+In the loop the memory data is multiplied and saved added with Register C.
+Once the execution is over you could see the output of the sum of product of 10 numbers in Register C. 
